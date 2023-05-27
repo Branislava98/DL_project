@@ -1,60 +1,49 @@
-# Homework 
-Here i am trying to build and/or run Docker container with someone else's Deep Learning repository.  
+# Deep Learning Project
+ 
 
-Based on [Facebook's CutLER](https://paperswithcode.com/paper/cut-and-learn-for-unsupervised-object)
+Based on [Zhanteng Xie's Yolact for CPU](https://github.com/zzuxzt/yolact_cpu/)
 
 ## How to run Docker image 
-I have already built and pushed an Image to [DockerHub](https://hub.docker.com/repository/docker/sandro295/cutler/general)  
+I have already built and pushed an Image to [DockerHub](https://hub.docker.com/u/branislava123)  
 
 All you need to do is have Docker daemon running  
 
-On WSL
-```
-sudo dockerd
-```
+Then pull my image
 
-Then pull my image    
-
-If your CPU is x86
 ```
-docker pull sandro295/cutler:multi-arch
-```
-If your CPU is ARM64  
-```
-docker pull sandro295/cutler:arm64
+docker pull branislava123/my-image:latest
 ```
 
 And run the container
 
 ```
-docker run sandro295/cutler:multi-arch
+docker run branislava123/my-image:latest
 ```
 
-It will run a [demo.py](./CutLER/maskcut/demo.py) on your CPU twice then it will run a [test](./test.py) which will compare two generated images with what i got on my machine. If they are similar it will print "Test passed".
+It will run a [eval.py](./yolact_cpu/eval.py) on your CPU. After, it will run a [test](./test.py) which will compare generated image with what I've got on my machine. If they are similar it will print "Test passed".
 
 After that the container will stop and output files will be availiable for copying
 
 ```
 docker ps -a
-docker cp <container_id>:/home/docker_user/images/outputs ~/<your_folder>
+docker cp <container_id>:./output/ ~/
 ```
 
 ## How to build Docker image
-If you are brave enough you can try to build an image all by yourself.  
 
 Firstly clone this repository recursively
 
 ```
-git clone https://github.com/Sandro295/CutLER.git --recursive
-cd CutLER
+git clone https://github.com/Branislava98/DL_project.git --recursive
+cd DL_project
 ```
 Make sure you have Docker installed and your Docker daemon is running  
 Then build an image
 ```
-docker build -t cutler .
+docker build -t yolact .
 ```
 
 You can try to run it with 
 ```
-docker run cutler
+docker run yolact
 ```
